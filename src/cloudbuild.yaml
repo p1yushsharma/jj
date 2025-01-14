@@ -1,4 +1,3 @@
-# cloudbuild.yaml
 steps:
   # Step 1: Checkout the repository
   - name: 'gcr.io/cloud-builders/git'
@@ -17,8 +16,7 @@ steps:
       - '--quiet'
 
 options:
-  logging: CLOUD_LOGGING_ONLY  # Optional, choose based on logging needs
-  logsBucket: gs://your-logs-bucket-name
+  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging
 
 # Timeout settings (optional)
 timeout: 1600s
