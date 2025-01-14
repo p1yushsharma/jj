@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "target/out-tsc/spec",
+    "declaration": true,  // Enable declaration file emission
+    "types": ["jest", "node"]
+  }
+}

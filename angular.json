@@ -1,0 +1,133 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "y": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src/main/webapp",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./webpack/webpack.custom.js"
+            },
+            "outputPath": "target/classes/static/",
+            "index": "src/main/webapp/app/index.html",
+            "main": "src/main/webapp/app/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+             "src/main/webapp/app/assets",
+             "src/main/webapp/app/favicon.ico"
+            ],
+            "styles": [
+              "src/main/webapp/app/assets/css/animate.min.css",
+              "src/main/webapp/app/assets/css/bootstrap.min.css",
+              "src/main/webapp/app/assets/css/default.css",
+              "src/main/webapp/app/assets/css/style.css",
+              "src/main/webapp/app/assets/css/font-awesome.min.css",
+              "src/main/webapp/app/assets/css/pe-icon-7-stroke.css",
+              "src/main/webapp/app/assets/css/magnific-popup.css",
+              "src/main/webapp/app/assets/css/slick.css",
+              "src/main/webapp/app/assets/css/meanmenu.min.css"
+              
+
+            ],
+            "scripts": [
+          
+
+  "src/main/webapp/app/assets/js/vendor/jquery-1.12.4.min.js", 
+  "src/main/webapp/app/assets/js/popper.min.js",
+  "src/main/webapp/app/assets/js/bootstrap.min.js",
+  "src/main/webapp/app/assets/js/main.js",
+  "src/main/webapp/app/assets/js/slick.min.js",
+  "src/main/webapp/app/assets/js/isotope.pkgd.min.js",
+  "src/main/webapp/app/assets/js/jquery.magnific-popup.min.js",
+  "src/main/webapp/app/assets/js/jquery.inview.min.js",
+  "src/main/webapp/app/assets/js/jquery.countTo.js",
+  "src/main/webapp/app/assets/js/jquery.easypiechart.js",
+  "src/main/webapp/app/assets/js/jquery.meanmenu.min.js"
+]
+
+              
+            
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "buildTarget": "y:build:development",
+            "port": 4200
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "y:build:production"
+            },
+            "development": {
+              "buildTarget": "y:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "jest.conf.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "cache": {
+      "enabled": true,
+      "path": "./target/angular/",
+      "environment": "all"
+    },
+    "packageManager": "npm",
+    "analytics": "759c99e7-10cd-4d5c-a90c-3d8b42600c50"
+  }
+}
