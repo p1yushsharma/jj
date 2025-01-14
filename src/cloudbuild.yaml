@@ -1,27 +1,25 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging. Set to NONE if you don't want logs.
+
 steps:
-  # Step 1: Checkout the repository
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', 'https://github.com/p1yushsharma/jj.git']
+  # Step 1: Build the application using Maven
+  - name: 'maven:latest'
+    entrypoint: 'mvn'  # Explicitly use 'mvn' as the entrypoint
+    args: ['clean', 'package', '-DskipTests']  # Run Maven with clean and package goals
 
-  # Step 2: Build the application with Maven (specify a version tag)
-  - name: 'gcr.io/cloud-builders/maven:3.8.4'  # Use a specific version instead of 'latest'
-    args: ['clean', 'package', '-DskipTests']
-
-  # Step 3: Deploy to App Engine
+  # Step 2: Deploy to Google App Engine (using the app.yaml)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
       - 'gcloud'
       - 'app'
       - 'deploy'
-      - '--quiet'
+      - '--quiet'  # Deploy without asking for confirmation
 
-options:
-  logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging
-
-# Timeout settings (optional)
-timeout: 1600s
-
-# Substitutions for dynamic variables (optional)
+# Substitutions (Optional: replace with your actual project ID)
 substitutions:
-  _PROJECT_ID: 'vigilant-quanta-442411-q8'
-  _REGION: 'us-central1'
+  _PROJECT_ID: 'vigilant-quanta-442411-q8'  # Replace with your actual project ID
+
+# Timeout for the entire build process
+timeout: '1200s'
+
+# Optionally, define a `env.yaml` with environment variables if needed
