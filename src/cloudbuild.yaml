@@ -3,8 +3,8 @@ steps:
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone', 'https://github.com/p1yushsharma/jj.git']
 
-  # Step 2: Build the application with Maven
-  - name: 'gcr.io/cloud-builders/maven'
+  # Step 2: Build the application with Maven (specify a version tag)
+  - name: 'gcr.io/cloud-builders/maven:3.8.4'  # Use a specific version instead of 'latest'
     args: ['clean', 'package', '-DskipTests']
 
   # Step 3: Deploy to App Engine
