@@ -16,6 +16,10 @@ steps:
       - 'deploy'
       - '--quiet'
 
+options:
+  logging: CLOUD_LOGGING_ONLY  # Optional, choose based on logging needs
+  logsBucket: gs://your-logs-bucket-name
+
 # Timeout settings (optional)
 timeout: 1600s
 
