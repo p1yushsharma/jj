@@ -2,12 +2,20 @@ options:
   logging: CLOUD_LOGGING_ONLY  # Enable Cloud Logging. Set to NONE if you don't want logs.
 
 steps:
-  # Step 1: Build the application using Maven
+  # Step 1: Checkout the repository (if not already cloned)
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/p1yushsharma/jj.git']
+
+  # Step 2: Remove any ESLint-related files (if present)
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['bash', '-c', 'rm -f .eslintrc.js .eslintrc.json .eslintignore || true']
+
+  # Step 3: Build the application using Maven
   - name: 'maven:latest'
     entrypoint: 'mvn'  # Explicitly use 'mvn' as the entrypoint
     args: ['clean', 'package', '-DskipTests']  # Run Maven with clean and package goals
 
-  # Step 2: Deploy to Google App Engine (using the app.yaml)
+  # Step 4: Deploy to Google App Engine (using the app.yaml)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
       - 'gcloud'
