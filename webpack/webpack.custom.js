@@ -23,7 +23,6 @@ module.exports = async (config, options, targetOptions) => {
   if (config.mode === 'development') {
     config.plugins.push(
       new ESLintPlugin({
-        configType: 'flat',
         extensions: ['ts', 'js', 'html'],
       }),
       new WebpackNotifierPlugin({
