@@ -29,7 +29,7 @@ spring:
   # JPA (Java Persistence API) Configuration
   jpa:
     hibernate:
-      ddl-auto: update  # Automatically update the schema to match your entities (use "create" for dropping and recreating tables)
+      ddl-auto: update  # Automatically update the schema to match your entities (use "none" for manual schema management)
     properties:
       hibernate:
         format_sql: true
@@ -55,5 +55,3 @@ spring:
 server:
   port: 8080
   forward-headers-strategy: native
-
-
